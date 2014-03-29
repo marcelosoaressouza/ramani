@@ -22,9 +22,21 @@
   <dd><%= @entidade.longitude %></dd>
   <dt><strong>Localization:</strong></dt>
   <dd>
-  <%= map(:center => { :latlng => [@entidade.latitude, @entidade.longitude], :zoom => 18},
+  <%= map(:center => { :latlng => [@entidade.latitude, @entidade.longitude], :zoom => 5},
                        :markers => [ { :latlng => [@entidade.latitude, @entidade.longitude], :popup => @entidade.description } ] )%>
    </dd>
+
+   <script>
+    geoserverUrl = "http://siscom.ibama.gov.br/geo-srv/cemam/wms";
+
+    eixoRodoviario = new L.TileLayer.WMS(geoserverUrl, {
+      layers: "cemam:eixo_rodoviario",
+      format: "image/png",
+      transparent: true
+    });
+
+    eixoRodoviario.addTo(map);
+   </script>
 </dl>
 
 <div class="form-actions">
